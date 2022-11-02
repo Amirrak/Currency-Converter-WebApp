@@ -8,6 +8,7 @@ import '@fontsource/roboto/700.css';
 import styles from '../styles/Home.module.css';
 import {Tabs, Tab, Box} from '@mui/material';
 import {TabPanel, TabContext, TabList} from '@mui/lab';
+import { Conversion } from '../component/Conversion';
 
 
 export default function Home() {
@@ -45,7 +46,7 @@ export default function Home() {
                 <Tab label="Historique" value="2" />
               </TabList>
             </Box>
-            <TabPanel value="1" className={styles.conversion}>Item One</TabPanel>
+            <TabPanel value="1" className={styles.conversion}><Conversion currency={listCurrency} /></TabPanel>
             <TabPanel value="2">Item Two</TabPanel>
           </TabContext>
         </Box>
