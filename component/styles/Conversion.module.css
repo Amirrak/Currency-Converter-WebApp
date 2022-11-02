@@ -12,27 +12,33 @@
     grid-template-areas:
     "a b c"
     "d b e";
-    background-color: #2196F3;
     gap: 10px;
 }
 
 .currencyA {
     grid-area: a;
-    background-color: red;
+    display: flex;
+    align-items: center;
 }
 .currencyB {
     grid-area: c;
-    background-color: red;
+    display: flex;
+    align-items: center;
 }
-.switch{
+.iconSwitch{
     grid-area: b;
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .amountA {
     grid-area: d;
-    background-color: red;
+    display: flex;
+    align-items: center;
 }
 .amountB {
     grid-area: e;
-    background-color: red;
+    display: flex;
+    align-items: center;
 }
