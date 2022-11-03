@@ -59,7 +59,7 @@ export const Conversion = (props) => {
                 </div>
 
                 <div className={styles.amountB}>
-                    <TextField disabled={disabledValueCurrencyB} label="Number" type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyA} />
+                    <TextField disabled={disabledValueCurrencyB} label="Number" type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyB} onChange={(e)=>setValueCurrencyB(e.target.value)} />
                 </div>
 
             </div>
