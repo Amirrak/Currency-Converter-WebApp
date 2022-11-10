@@ -1,20 +1,55 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from "./styles/Conversion.module.css"
 import { TextField, Autocomplete } from '@mui/material';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 
-export const Conversion = (props) => {
-    const [valueCurrencyA, setValueCurrencyA] = useState(0);
-    const [valueCurrencyB, setValueCurrencyB] = useState(0);
-    const [currencySelectedA, setCurrencySelectedA ] = useState("");
-    const [currencySelectedB, setCurrencySelectedB ] = useState("");
-    const [disabledValueCurrencyA, setDisabledValueCurrencyA ] = useState(true);
-    const [disabledValueCurrencyB, setDisabledValueCurrencyB ] = useState(true);
 
-    var listCurrent = [];
+export const Conversion = (props) => {
+    const [valueCurrencyA, setValueCurrencyA] = useState(10);
+    const [valueCurrencyB, setValueCurrencyB] = useState(0);
+    const [tmp, setTmp] = useState("");
+    const [currencySelectedA, setCurrencySelectedA ] = useState("Euro");
+    const [currencySelectedB, setCurrencySelectedB ] = useState("United States Dollar");
+
+    var listCurrent = {};
     for(var key in props.currency){
-        listCurrent.push(props.currency[key])
+        listCurrent[props.currency[key]]=key
     }
+
+    var invertAB = () => {
+        console.log(tmp)
+        setCurrencySelectedA(currencySelectedB)
+        setCurrencySelectedB(tmp)
+    }
+
+    useEffect(() => {
+        setTmp(currencySelectedA);
+        const delayDebounceFn = setTimeout(() => {
+            if(currencySelectedA === currencySelectedB){
+                console.log('Meme monnaie selectionner')
+            }else {
+                if((currencySelectedA!==null && currencySelectedA!==undefined && currencySelectedA!=="") &&
+                    (currencySelectedB!==null && currencySelectedB!==undefined && currencySelectedB!=="")){
+                    var req = "https://api.frankfurter.app/latest?amount="+valueCurrencyA+
+                        "&from="+listCurrent[currencySelectedA]+'&to='+listCurrent[currencySelectedB]
+                    axios.get(req)
+                    .then(function (response) {
+                        var key = Object.keys(response.data.rates)[0]
+                        setValueCurrencyB(response.data.rates[key])
+                        console.log('requete')
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    });
+                }
+            }
+        }, 1000)
+      
+        return () => clearTimeout(delayDebounceFn)
+    }, [valueCurrencyA, currencySelectedA, currencySelectedB]);
+
+
     return (
        <div className={styles.container}>
            <div className={styles.tableau}>
@@ -22,19 +57,15 @@ export const Conversion = (props) => {
                     className={styles.currencyA}
                     onChange={(e, value)=>{
                         setCurrencySelectedA(value)
-                        if(value!== "" && value !== undefined && value!==null) {
-                            setDisabledValueCurrencyA(false)
-                        }else {
-                            setDisabledValueCurrencyA(true)
-                        }
                     }}
+                    value={currencySelectedA}
                     disablePortal
                     id="combo-box-demo"
-                    options={listCurrent}
+                    options={Object.keys(listCurrent)}
                     renderInput={(params) => <TextField {...params} label="Currency" />}
                 />
 
-                <div className={styles.iconSwitch}>
+                <div className={styles.iconSwitch} onClick={invertAB}>
                     <CompareArrowsIcon sx={{ fontSize: 50, cursor:'pointer' }} />
                 </div>
 
@@ -42,24 +73,20 @@ export const Conversion = (props) => {
                     className={styles.currencyB}
                     onChange={(e, value)=>{
                         setCurrencySelectedB(value)
-                        if(value!== "" && value !== undefined && value!==null) {
-                            setDisabledValueCurrencyB(false)
-                        }else {
-                            setDisabledValueCurrencyB(true)
-                        }
                     }}
+                    value={currencySelectedB}
                     disablePortal
                     id="combo-box-demo"
-                    options={listCurrent}
+                    options={Object.keys(listCurrent)}
                     renderInput={(params) => <TextField {...params} label="Currency" />}
                 />
 
                 <div className={styles.amountA}>
-                    <TextField disabled={disabledValueCurrencyA} label="Number" type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyA} onChange={(e)=>setValueCurrencyA(e.target.value)} />
+                    <TextField disabled={(currencySelectedA===null || currencySelectedA===undefined || currencySelectedA==="")} type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyA} onChange={(e)=>setValueCurrencyA(e.target.value)} />
                 </div>
 
                 <div className={styles.amountB}>
-                    <TextField disabled={disabledValueCurrencyB} label="Number" type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyB} onChange={(e)=>setValueCurrencyB(e.target.value)} />
+                    <TextField disabled type="number" variant="outlined" sx={{width:'100%'}} value={valueCurrencyB} onChange={(e)=>setValueCurrencyB(e.target.value)} />
                 </div>
 
             </div>
