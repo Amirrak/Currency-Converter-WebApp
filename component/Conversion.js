@@ -11,12 +11,20 @@ export const Conversion = (props) => {
     const [tmp, setTmp] = useState("");
     const [currencySelectedA, setCurrencySelectedA ] = useState("Euro");
     const [currencySelectedB, setCurrencySelectedB ] = useState("United States Dollar");
+    const [listCurrent, setListCurrent] = useState(swap(props.currency))
 
-    var listCurrent = {};
-    for(var key in props.currency){
-        listCurrent[props.currency[key]]=key
+    function swap(json){
+        var ret = {};
+        for(var key in json){
+          ret[json[key]] = key;
+        }
+        return ret;
     }
 
+    useEffect(()=>{
+        console.log('RENDER')
+    },[])
+    
     var invertAB = () => {
         console.log(tmp)
         setCurrencySelectedA(currencySelectedB)
