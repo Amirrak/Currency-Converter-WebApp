@@ -21,12 +21,8 @@ export const Conversion = (props) => {
         return ret;
     }
 
-    useEffect(()=>{
-        console.log('RENDER')
-    },[])
-    
+
     var invertAB = () => {
-        console.log(tmp)
         setCurrencySelectedA(currencySelectedB)
         setCurrencySelectedB(tmp)
     }

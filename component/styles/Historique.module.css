@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerForm {
+    width: 100%;
+    display: grid;
+    grid-template-areas: "a c"
+                         "d e"
+                         "f f";
+    gap: 1rem;
+}
+
+.currencyHistoric{
+    grid-area: a;
+}
+
+.currencyRef {
+    grid-area: c;
+}
+.dateFrom {
+    grid-area: d;
+}
+.dateTo {
+    grid-area: e;
+}
+.bouton {
+    grid-area: f;
+}

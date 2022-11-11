@@ -9,6 +9,7 @@ import styles from '../styles/Home.module.css';
 import {Tabs, Tab, Box, CircularProgress} from '@mui/material';
 import {TabPanel, TabContext, TabList} from '@mui/lab';
 import { Conversion } from '../component/Conversion';
+import Historique from '../component/Hisorique';
 
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    console.log('requete 1')
     axios.get('https://api.frankfurter.app/currencies')
     .then(function (response) {
       setListCurrency(response.data);
@@ -48,7 +50,9 @@ export default function Home() {
             <TabPanel value="1" className={styles.conversion}>
               {listCurrency.length===0 ? <CircularProgress /> : <Conversion currency={listCurrency} />}
             </TabPanel>
-            <TabPanel value="2">Item Two</TabPanel>
+            <TabPanel value="2" className={styles.conversion}>              
+              {listCurrency.length===0 ? <CircularProgress /> : <Historique currency={listCurrency}/>}
+            </TabPanel>
           </TabContext>
         </Box>
       </main>
