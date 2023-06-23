@@ -48,7 +48,7 @@ export const Conversion = (props) => {
                     });
                 }
             }
-        }, 1000)
+        }, 100)
       
         return () => clearTimeout(delayDebounceFn)
     }, [valueCurrencyA, currencySelectedA, currencySelectedB]);

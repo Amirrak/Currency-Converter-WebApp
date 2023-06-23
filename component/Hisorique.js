@@ -20,7 +20,7 @@ export default function Historique(props) {
     const [data, setData] = useState();
 
     const [from, setFrom] = useState(
-        dayjs().subtract(1,'day'),
+        dayjs().subtract(3,'day'),
     );
     const [to, setTo] = useState(
         dayjs(),
@@ -42,8 +42,8 @@ export default function Historique(props) {
         return ret;
     }
     var showHistoric = () => {
-        var req = "https://api.frankfurter.app/"+from.year()+'-'+from.month()+'-'+from.date()+
-                ".."+to.year()+'-'+to.month()+'-'+to.date()+"?from="+listCurrent[currencyRef]+"&to="+listCurrent[currencyHistoric];
+        var req = "https://api.frankfurter.app/"+from.format('YYYY')+'-'+from.format('MM')+'-'+from.format('DD')+
+                ".."+to.format('YYYY')+'-'+to.format('MM')+'-'+to.format('DD')+"?from="+listCurrent[currencyRef]+"&to="+listCurrent[currencyHistoric];
         axios.get(req)
         .then(function (response) {
             setRateCurrency(response.data.rates)
