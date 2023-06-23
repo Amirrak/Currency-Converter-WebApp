@@ -1,4 +1,4 @@
-This is a Currency Web App, build using the [Next.js](https://nextjs.org/) framework !
+This is a Currency Web App, built using the [Next.js](https://nextjs.org/) framework !
 
 You can check the [DEMO HERE](https://amirrak.github.io/Currency-WebApp/) !
 
