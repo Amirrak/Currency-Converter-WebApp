@@ -4,7 +4,9 @@ You can check the [DEMO HERE](https://github.com/Amirrak/Currency-WebApp.git) !
 
 Library used in this project
 
-[React.js](https://legacy.reactjs.org/)
-[MUI](https://mui.com/)
-[axios](https://axios-http.com/)
-[dayjs](https://day.js.org/)
+<ul>
+<li> <a href="https://legacy.reactjs.org/">React.js</a> </li>
+<li><a href="https://mui.com/">MUI</a></li>
+<li><a href="https://axios-http.com/">axios</a></li>
+<li><a href="https://day.js.org/">dayjs</a></li>
+</ul>
