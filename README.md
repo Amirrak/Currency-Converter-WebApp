@@ -1,6 +1,6 @@
 This is a Currency Web App, built using the [Next.js](https://nextjs.org/) framework !
 
-You can check the [DEMO HERE](https://amirrak.github.io/Currency-WebApp/) !
+You can check the [DEMO HERE](https://amirrak.github.io/Currency-Converter-WebApp/) !
 
 Library used in this project
 
